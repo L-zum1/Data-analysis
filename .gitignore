@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+*.swp
+*.swo
+*~
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# 生成的文件
+*.csv
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# 日志文件
+*.log
+*.log.*
+logs/
+
+# 配置文件
+config.ini
+settings.py
+*.conf
+*.cfg
