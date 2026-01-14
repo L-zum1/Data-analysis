@@ -9,6 +9,7 @@ import json
 import csv
 import asyncio
 import re
+import os
 
 #构建函数获取数据
 async def get_data_and_wash():
@@ -101,16 +102,20 @@ async def get_data_and_wash():
                 'wind_direction': wind_direction,
                 'wind_level': wind_level
             })
+    # 构建绝对路径
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # 使用绝对路径读取CSV文件
+    csv_path = os.path.join(script_dir, 'hourly_weather_data.csv')
     #将提取到的天气数据保存到CSV文件
     if weekly_weather_list:
-        csv_file = 'weekly_weather_data.csv'
+        csv_file = os.path.join(script_dir, 'weekly_weather_data.csv')
         with open(csv_file, 'w', newline='', encoding='utf-8') as f:
             fieldnames = ['date', 'weather', 'max_temp', 'min_temp', 'wind_direction', 'wind_level']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(weekly_weather_list)
     if hourly_data_list:
-        csv_file = 'hourly_weather_data.csv'
+        csv_file = os.path.join(script_dir, 'hourly_weather_data.csv')
         with open(csv_file, 'w', newline='', encoding='utf-8') as f:
             fieldnames = ['time', 'temperature', 'wind_direction', 'wind_level', 'humidity']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -119,6 +124,7 @@ async def get_data_and_wash():
         print(f"\n数据已保存到 {csv_file}")
         print(f"共提取 {len(hourly_data_list)} 条24小时数据")
     if weekly_weather_list:
+        csv_file = os.path.join(script_dir, 'weekly_weather_data.csv') 
         print(f"\n数据已保存到 {csv_file}")
         print(f"共提取 {len(weekly_weather_list)} 天的数据")
 asyncio.run(get_data_and_wash())
